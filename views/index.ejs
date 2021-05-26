@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE-edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Real Time Colors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href='index.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type='text/javascript'>
+
+    $(document).ready(function(){
+        const socket = io();
+        socket.emit('connected');
+        socket.on('updateAllClients', function(data){
+                document.body.style.backgroundColor = data.color;
+    });
+    $('#green').click(function(){
+        socket.emit('green');
+    });
+    $('#blue').click(function(){
+        socket.emit('blue');
+    });
+    $('#pink').click(function(){
+        socket.emit('pink');
+        });
+    })
+    </script>
+</head>
+<body>
+
+    <div class='container'>
+        <h1 class='colors'>Real Time Colors</h1>
+        <h3>Choose Background!</h3>
+
+        <button id='green' type='button' class='btn btn-success btn-lg'></button>
+        <button id='blue' type='button' class='btn btn-primary btn-lg'></button>
+        <button id='pink' type='button' class='btn btn-danger btn-lg'></button>
+    </div>
+
+</body>
+</html>
